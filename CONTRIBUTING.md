@@ -6,6 +6,19 @@ Thanks for considering contributing. This is a small, focused project, keeping i
 
 For anything beyond a small fix (a typo, a clear bug), open an issue first describing what you want to change and why. Saves everyone time if the direction doesn't fit the project.
 
+## How to submit a change
+
+1. **Fork** this repo (the button's top-right on the GitHub page), then clone your fork locally.
+2. Create a branch for your change, don't work directly on `master`:
+   ```
+   git checkout -b fix-short-description
+   ```
+3. Make your change, following the setup and standards below.
+4. Push your branch to your fork and open a pull request against this repo's `master` branch. GitHub will show you that option automatically after pushing.
+5. The test suite (`.github/workflows/tests.yml`) runs automatically on your PR. A merge won't go through until it passes, fix any failures it surfaces before asking for a look.
+
+There's no separate `develop` branch here, `master` is always the current, working state of the project, and that's what your PR targets directly.
+
 ## Setup
 
 1. `cp api/config.example.php api/config.php`, fill in a database and at least one AI provider key (Groq or Mistral both have free tiers).
