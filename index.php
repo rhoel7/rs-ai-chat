@@ -54,25 +54,75 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   }
 
   /* ---------- Hero (demo-only — not part of the widget) ---------- */
-  .hero-section {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    max-width: 1000px; /* matches .features below exactly, so both sections share the same left/right edges down the page instead of looking misaligned */
+  .hero-wrap {
+    max-width: 1000px; /* matches .features below exactly, so all three sections share the same left/right edges down the page */
     margin: 4rem auto 3rem;
     padding: 0 1.5rem;
+  }
+  .hero-wrap h1 {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .hero-section {
+    display: flex;
+    align-items: flex-start; /* the video is taller than the text block — centering them made the video tower both above and below the text, top-aligning reads as a matched, balanced pair instead */
+    gap: 3rem;
   }
   .hero-text {
     flex: 1 1 480px;
     text-align: center;
   }
-  .hero-text h1 {
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
   .hero-text p.pitch {
     font-size: 1.15rem;
     color: #495057;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .hero-github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: #212529;
+    color: #fff;
+    border-radius: 0.6rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    transition: background-color 0.15s ease;
+  }
+  .hero-github-btn:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  .hero-github-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(13, 110, 253, 0.07);
+    color: #343a40;
+    border-radius: 2rem;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .hero-badge svg {
+    width: 16px;
+    height: 16px;
+    color: #0d6efd;
+    flex-shrink: 0;
   }
   .hero-image-wrap {
     flex: 0 0 340px;
@@ -89,7 +139,6 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   @media (max-width: 900px) {
     .hero-section {
       flex-direction: column;
-      margin-top: 3rem;
       gap: 2rem;
     }
     .hero-image-wrap {
@@ -178,17 +227,29 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 
 <div id="envBanner" class="<?php echo htmlspecialchars($envClass); ?>"><?php echo htmlspecialchars($envLabel); ?></div>
 
-<div class="hero-section">
-  <div class="hero-text">
-    <h1><?php echo htmlspecialchars($chatTitle); ?> Demo</h1>
-    <p class="pitch">
-      A multi-provider AI chat assistant. Switch between Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI without touching the frontend, ground its answers in your own FAQ or documentation with a CSV drop, and give it a defined persona instead of a generic AI voice. Built with encrypted memory, rate limiting, and real security from the ground up. Try it in the corner.
-    </p>
-  </div>
-  <div class="hero-image-wrap">
-    <video autoplay muted loop playsinline poster="docs/screenshots/desktop-chat.png" aria-label="Demo of the Reunify AI Chat widget in use">
-      <source src="docs/screenshots/hero-demo.mp4" type="video/mp4">
-    </video>
+<div class="hero-wrap">
+  <h1><?php echo htmlspecialchars($chatTitle); ?> Demo</h1>
+  <div class="hero-section">
+    <div class="hero-text">
+      <p class="pitch">
+        A multi-provider AI chat assistant. Switch between Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI without touching the frontend, ground its answers in your own FAQ or documentation with a CSV drop, and give it a defined persona instead of a generic AI voice. Built with encrypted memory, rate limiting, and real security from the ground up. Try it in the corner.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>AES-256 encrypted</span>
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>7 AI providers</span>
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>RAG-grounded</span>
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>Self-hosted, no vendor lock-in</span>
+      </div>
+      <a href="https://github.com/rhoel7/rs-ai-chat" target="_blank" rel="noopener noreferrer" class="hero-github-btn">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+        View on GitHub
+      </a>
+    </div>
+    <div class="hero-image-wrap">
+      <video autoplay muted loop playsinline poster="docs/screenshots/desktop-chat.png" aria-label="Demo of the Reunify AI Chat widget in use">
+        <source src="docs/screenshots/hero-demo.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </div>
 
