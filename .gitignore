@@ -11,5 +11,10 @@ Thumbs.db
 *.swp
 *.log
 
+# Claude Code project context — kept local, not published. Claude Code
+# still reads this from the project root regardless of git tracking
+# status, it just never leaves this machine.
+CLAUDE.md
+
 # If a local PHP dependency setup is ever added (composer install)
 /vendor/
