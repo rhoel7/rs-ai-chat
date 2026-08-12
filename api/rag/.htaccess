@@ -1,0 +1,12 @@
+# Nothing in this folder should ever be reached by a direct URL — RAG
+# ingestion runs through api/admin.php's rag_ingest action, which requires
+# the real authenticated token check. This folder holds ingestion logic
+# and the incoming/ CSV drop folder, neither should be web-servable.
+
+<FilesMatch ".*">
+    Require all denied
+</FilesMatch>
+<FilesMatch ".*">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

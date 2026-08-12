@@ -1,0 +1,48 @@
+# Prevent directory listing — without this, visiting a folder with no
+# index file (e.g. api/db/) could list every filename in it if the host
+# has autoindex enabled.
+Options -Indexes
+
+# Deny-by-default: block direct browser access to every PHP file in this
+# folder and its subfolders (providers/, config.php, ProviderFactory.php, etc).
+# None of those are meant to be loaded directly by a URL — they only run
+# when required/included internally by chat.php.
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>
+
+# Also block .sql files — schema.sql, rate_limit_schema.sql, etc. aren't
+# PHP, so the rule above doesn't cover them, and they were directly
+# downloadable until this was added. No secrets in them, but no reason
+# to serve database structure to the public either.
+<FilesMatch "\.sql$">
+    Require all denied
+</FilesMatch>
+
+# Explicitly re-allow the files the frontend/admin actually need to reach.
+# admin.php is safe to leave reachable — it's protected by a real secret
+# token checked inside the file itself (see admin.php), not by hiding it.
+<Files "chat.php">
+    Require all granted
+</Files>
+<Files "admin.php">
+    Require all granted
+</Files>
+
+# Fallback syntax for older Apache versions (harmless to leave both in place)
+<FilesMatch "\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+<FilesMatch "\.sql$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+<Files "chat.php">
+    Order allow,deny
+    Allow from all
+</Files>
+<Files "admin.php">
+    Order allow,deny
+    Allow from all
+</Files>

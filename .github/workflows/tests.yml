@@ -1,0 +1,67 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: reunify_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, openssl, curl, json
+
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h127.0.0.1 -uroot --silent && break
+            sleep 1
+          done
+
+      - name: Load database schema
+        run: |
+          mysql -h127.0.0.1 -uroot reunify_test < api/db/schema.sql
+          mysql -h127.0.0.1 -uroot reunify_test < api/db/rate_limit_schema.sql
+          mysql -h127.0.0.1 -uroot reunify_test < api/rag/schema.sql
+
+      - name: Run PHP test suite
+        env:
+          DB_HOST: 127.0.0.1
+          DB_NAME: reunify_test
+          DB_USER: root
+          DB_PASS: ''
+        run: |
+          export CHAT_ENCRYPTION_KEY=$(php -r "echo base64_encode(random_bytes(32));")
+          php tests/run.php
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run JS test suite
+        run: node tests/js/markdown.test.js
+
+      - name: Lint every PHP file
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l

@@ -1,0 +1,17 @@
+# Tests are a development-time tool, not something that should ever be
+# reachable by a public URL. Unlike api/.htaccess (which allows chat.php
+# and admin.php through), NOTHING in this folder gets an exception —
+# tests/run.php connects to the real config.php database, and running it
+# against a live site over the internet is never the right way to use it.
+#
+# Run tests via terminal instead: php tests/run.php (needs SSH/terminal
+# access to the server, or run locally against a copy of the code pointed
+# at a disposable test database).
+
+<FilesMatch ".*">
+    Require all denied
+</FilesMatch>
+<FilesMatch ".*">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

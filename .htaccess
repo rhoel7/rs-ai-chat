@@ -1,0 +1,5 @@
+# Prevent directory listing at the project root. index.php, chat.js, and
+# docs/screenshots are meant to be public — this only stops someone from
+# browsing the raw folder contents if no index file is being served for
+# some reason.
+Options -Indexes

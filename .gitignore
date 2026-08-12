@@ -1,0 +1,15 @@
+# Never commit real secrets — config.php holds live API keys, DB
+# credentials, and the encryption key. Copy api/config.example.php to
+# api/config.php and fill in real values there; config.php itself stays
+# untracked.
+api/config.php
+api/config.bak.php
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# If a local PHP dependency setup is ever added (composer install)
+/vendor/
