@@ -25,6 +25,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Create config.php from the committed template
+        # config.php itself is gitignored (it holds real secrets) and was
+        # never pushed, so it doesn't exist on a fresh checkout at all.
+        # The "Run PHP test suite" step below sets real environment
+        # variables (DB_NAME, CHAT_ENCRYPTION_KEY, etc.) that config.php's
+        # setDefaultEnv() calls are designed to pick up instead of the
+        # placeholder defaults — but that mechanism only works once the
+        # file actually exists to be required in the first place.
+        run: cp api/config.example.php api/config.php
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
