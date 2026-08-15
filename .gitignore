@@ -5,6 +5,14 @@
 api/config.php
 api/config.bak.php
 
+# Real business-specific RAG knowledge stays local, not published —
+# pricing, policies, and other specifics don't belong permanently in a
+# public repo's git history. Only the generic example template is meant
+# to be shared. This covers any CSV dropped here, not just today's,
+# so the same mistake can't happen again with a differently-named file.
+api/rag/incoming/*.csv
+!api/rag/incoming/example.csv
+
 # OS/editor noise
 .DS_Store
 Thumbs.db

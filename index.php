@@ -30,6 +30,17 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php echo htmlspecialchars($chatTitle); ?> Demo</title>
+
+<link rel="icon" type="image/x-icon" href="docs/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="docs/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="docs/favicon/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="docs/favicon/apple-touch-icon.png">
+<link rel="manifest" href="docs/favicon/site.webmanifest">
+
+<meta property="og:title" content="<?php echo htmlspecialchars($chatTitle); ?> Demo">
+<meta property="og:description" content="A self-hosted, multi-provider AI chat assistant with encrypted memory, RAG over your own docs, and a configurable persona.">
+<meta property="og:image" content="docs/favicon/favicon-big.png">
+<meta property="og:type" content="website">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
   body {
@@ -54,15 +65,49 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   }
 
   /* ---------- Hero (demo-only — not part of the widget) ---------- */
-  .hero-wrap {
-    max-width: 1000px; /* matches .features below exactly, so all three sections share the same left/right edges down the page */
-    margin: 4rem auto 3rem;
-    padding: 0 1.5rem;
+  .hero-dark-band {
+    background-color: #1a1a1a;
+    padding: 3.5rem 1.5rem 3rem;
+    margin-bottom: 3rem;
   }
-  .hero-wrap h1 {
-    font-weight: 700;
-    text-align: center;
+  .hero-wrap {
+    max-width: 1000px; /* matches .features below exactly, so the hero's content still aligns with the rest of the page even though its background now extends full-width */
+    margin: 0 auto;
+  }
+  .hero-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
     margin-bottom: 2rem;
+  }
+  .hero-logo {
+    width: 68px;
+    height: auto; /* no circular frame — this is the plain line-art mark now, aspect ratio preserved */
+    flex-shrink: 0;
+  }
+  .hero-logo-row h1 {
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 0;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .hero-subtitle {
+    color: #adb5bd;
+    font-size: 1rem;
+    margin: 0.2rem 0 0;
+    text-align: left;
+  }
+  @media (max-width: 480px) {
+    .hero-logo-row {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-logo-row h1,
+    .hero-subtitle {
+      text-align: center;
+    }
   }
   .hero-section {
     display: flex;
@@ -75,7 +120,7 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   }
   .hero-text p.pitch {
     font-size: 1.15rem;
-    color: #495057;
+    color: #ced4da;
   }
   .hero-badges {
     display: flex;
@@ -84,12 +129,21 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     gap: 0.75rem;
     margin-top: 2rem;
   }
+  .hero-disclaimer {
+    font-size: 0.85rem;
+    color: #9aa1a8;
+    font-style: italic;
+    margin-top: 1rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .hero-github-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background-color: #212529;
-    color: #fff;
+    background-color: #fff;
+    color: #1a1a1a;
     border-radius: 0.6rem;
     padding: 0.7rem 1.4rem;
     font-size: 0.95rem;
@@ -99,8 +153,8 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     transition: background-color 0.15s ease;
   }
   .hero-github-btn:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #e9ecef;
+    color: #1a1a1a;
   }
   .hero-github-btn svg {
     width: 20px;
@@ -111,8 +165,8 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: rgba(13, 110, 253, 0.07);
-    color: #343a40;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e9ecef;
     border-radius: 2rem;
     padding: 0.55rem 1.1rem;
     font-size: 0.9rem;
@@ -227,12 +281,22 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 
 <div id="envBanner" class="<?php echo htmlspecialchars($envClass); ?>"><?php echo htmlspecialchars($envLabel); ?></div>
 
+<div class="hero-dark-band">
 <div class="hero-wrap">
-  <h1><?php echo htmlspecialchars($chatTitle); ?> Demo</h1>
+  <div class="hero-logo-row">
+    <img src="docs/logo/RAIA-white-transparent.png" alt="RAIA logo" class="hero-logo">
+    <div>
+      <h1><?php echo htmlspecialchars($chatTitle); ?></h1>
+      <p class="hero-subtitle">Reunify AI Assistant — Demo</p>
+    </div>
+  </div>
   <div class="hero-section">
     <div class="hero-text">
       <p class="pitch">
         A multi-provider AI chat assistant. Switch between Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI without touching the frontend, ground its answers in your own FAQ or documentation with a CSV drop, and give it a defined persona instead of a generic AI voice. Built with encrypted memory, rate limiting, and real security from the ground up. Try it in the corner.
+      </p>
+      <p class="hero-disclaimer">
+        Heads up: this demo currently works as a knowledge-grounded chat assistant, answering questions and pulling from real documentation. Full autonomous agent capabilities, taking actions on your behalf, not just answering, are on the roadmap, not built yet.
       </p>
       <div class="hero-badges">
         <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>AES-256 encrypted</span>
@@ -251,6 +315,7 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
       </video>
     </div>
   </div>
+</div>
 </div>
 
 <div class="features">
