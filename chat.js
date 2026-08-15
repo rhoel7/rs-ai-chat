@@ -34,6 +34,7 @@ function openPanel() {
 function dismissChatHint() {
   const hint = document.getElementById('chatHint');
   if (hint) hint.classList.remove('visible');
+  chatBubble.classList.remove('hinting');
   try {
     localStorage.setItem('reunify_chat_hint_dismissed', 'true');
   } catch (e) {
@@ -57,6 +58,7 @@ function dismissChatHint() {
   setTimeout(() => {
     if (!chatPanel.classList.contains('collapsed')) return; // already opened in the meantime
     hint.classList.add('visible');
+    chatBubble.classList.add('hinting');
   }, 1800);
 
   const dismissBtn = document.getElementById('chatHintDismiss');
