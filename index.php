@@ -81,6 +81,22 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     gap: 1.1rem;
     margin-bottom: 2rem;
   }
+  .hero-eyebrow-wrap {
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background-color: rgba(13, 110, 253, 0.18);
+    color: #8bb9fe;
+    border: 1px solid rgba(13, 110, 253, 0.45);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
   .hero-logo {
     width: 68px;
     height: auto; /* no circular frame — this is the plain line-art mark now, aspect ratio preserved */
@@ -138,27 +154,49 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     margin-left: auto;
     margin-right: auto;
   }
+  .hero-cta-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+  .hero-cta-primary,
   .hero-github-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
+    border-radius: 0.7rem;
+    padding: 0.95rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  .hero-cta-primary {
+    background-color: #0d6efd;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
+  }
+  .hero-cta-primary:hover {
+    background-color: #0b5ed7;
+    color: #fff;
+  }
+  .hero-github-btn {
     background-color: #fff;
     color: #1a1a1a;
-    border-radius: 0.6rem;
-    padding: 0.7rem 1.4rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    margin-top: 1.5rem;
-    transition: background-color 0.15s ease;
   }
   .hero-github-btn:hover {
     background-color: #e9ecef;
     color: #1a1a1a;
   }
+  .hero-cta-primary svg,
   .hero-github-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
   }
   .hero-badge {
@@ -310,6 +348,9 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 
 <div class="hero-dark-band">
 <div class="hero-wrap">
+  <div class="hero-eyebrow-wrap">
+    <span class="hero-eyebrow">📦 Open-Source PHP Template — Live Code Demo</span>
+  </div>
   <div class="hero-logo-row">
     <img src="docs/logo/RAIA-white-transparent.png" alt="RAIA logo" class="hero-logo">
     <div>
@@ -320,7 +361,7 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   <div class="hero-section">
     <div class="hero-text">
       <p class="pitch">
-        A multi-provider AI chat assistant. Switch between Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI without touching the frontend, ground its answers in your own FAQ or documentation with a CSV drop, and give it a defined persona instead of a generic AI voice. Built with encrypted memory, rate limiting, and real security from the ground up. Try it in the corner.
+        This is a live demo of RAIA, an open-source PHP template for building your own self-hosted AI chat widget. Clone it, connect Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI without touching the frontend, ground its answers in your own FAQ or documentation with a CSV drop, and give it a defined persona instead of a generic AI voice. Built with encrypted memory, rate limiting, and real security from the ground up. Try the chat bubble in the corner to see it in action.
       </p>
       <p class="hero-disclaimer">
         Heads up: this demo currently works as a knowledge-grounded chat assistant, answering questions and pulling from real documentation. Full autonomous agent capabilities, taking actions on your behalf, not just answering, are on the roadmap, not built yet.
@@ -330,11 +371,9 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
         <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>7 AI providers</span>
         <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>RAG-grounded</span>
         <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>Self-hosted, no vendor lock-in</span>
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>MIT Licensed</span>
+        <span class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Plain PHP + MySQL</span>
       </div>
-      <a href="https://github.com/rhoel7/rs-ai-chat" target="_blank" rel="noopener noreferrer" class="hero-github-btn">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-        View on GitHub
-      </a>
     </div>
     <div class="hero-image-wrap">
       <video id="heroDemoVideo" autoplay muted loop playsinline poster="docs/screenshots/desktop-chat.png" aria-label="Demo of the Reunify AI Chat widget in use — click to try it live">
@@ -342,6 +381,16 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
       </video>
       <span class="hero-video-cta">Click to try it live →</span>
     </div>
+  </div>
+  <div class="hero-cta-row">
+    <button type="button" id="heroTryDemoBtn" class="hero-cta-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.7 21.7 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/></svg>
+      Test it out in the corner
+    </button>
+    <a href="https://github.com/rhoel7/rs-ai-chat" target="_blank" rel="noopener noreferrer" class="hero-github-btn">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+      Clone this template on GitHub
+    </a>
   </div>
 </div>
 </div>
@@ -415,6 +464,7 @@ include __DIR__ . '/widget.php';
   // interactive. Rather than leave that a dead end, clicking it opens
   // the actual live chat, turning a misdirected click into the right one.
   document.getElementById('heroDemoVideo').addEventListener('click', openPanel);
+  document.getElementById('heroTryDemoBtn').addEventListener('click', openPanel);
 </script>
 </body>
 </html>
