@@ -127,7 +127,7 @@ setDefaultEnv('AGENT_NAME', 'Raia');
 // first-time visitors often don't notice a small floating button on their
 // own. Disappears permanently once they open the chat or dismiss it
 // explicitly. Set to an empty string to disable it entirely.
-setDefaultEnv('CHAT_HINT_TEXT', 'Questions? Chat with us!');
+setDefaultEnv('CHAT_HINT_TEXT', 'Try the live demo! 👋');
 
 // Always told to the model, regardless of whether persona is enabled —
 // same reasoning as the date grounding below. Without this, the AI falls

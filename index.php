@@ -182,6 +182,9 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     flex: 0 0 340px;
     max-width: 340px; /* the demo video is portrait (1104x1608) — narrow by nature, which is exactly what makes it a good side column rather than a full-width stacked element */
   }
+  .hero-image-wrap {
+    position: relative;
+  }
   .hero-image-wrap video {
     width: 100%;
     height: auto;
@@ -189,6 +192,30 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     border-radius: 1rem;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     border: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+  }
+  .hero-image-wrap:hover video {
+    box-shadow: 0 24px 70px rgba(13, 110, 253, 0.3);
+  }
+  .hero-video-cta {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+  }
+  .hero-image-wrap:hover .hero-video-cta {
+    opacity: 1;
   }
   @media (max-width: 900px) {
     .hero-section {
@@ -310,9 +337,10 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
       </a>
     </div>
     <div class="hero-image-wrap">
-      <video autoplay muted loop playsinline poster="docs/screenshots/desktop-chat.png" aria-label="Demo of the Reunify AI Chat widget in use">
+      <video id="heroDemoVideo" autoplay muted loop playsinline poster="docs/screenshots/desktop-chat.png" aria-label="Demo of the Reunify AI Chat widget in use — click to try it live">
         <source src="docs/screenshots/hero-demo.mp4" type="video/mp4">
       </video>
+      <span class="hero-video-cta">Click to try it live →</span>
     </div>
   </div>
 </div>
@@ -381,5 +409,12 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 // nothing but this line to work on any PHP page.
 include __DIR__ . '/widget.php';
 ?>
+<script>
+  // Demo-page-only behavior, not part of the reusable widget itself —
+  // real visitors were clicking the hero video expecting it to be
+  // interactive. Rather than leave that a dead end, clicking it opens
+  // the actual live chat, turning a misdirected click into the right one.
+  document.getElementById('heroDemoVideo').addEventListener('click', openPanel);
+</script>
 </body>
 </html>
