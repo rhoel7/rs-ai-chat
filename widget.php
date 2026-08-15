@@ -45,6 +45,14 @@ $assetPrefix = $widgetBase !== '' ? $widgetBase . '/' : '';
   </svg>
 </button>
 
+<?php $chatHintText = getenv('CHAT_HINT_TEXT'); ?>
+<?php if ($chatHintText !== '' && $chatHintText !== false): ?>
+<div id="chatHint" class="chat-hint">
+  <span><?php echo htmlspecialchars($chatHintText); ?></span>
+  <button id="chatHintDismiss" aria-label="Dismiss">&times;</button>
+</div>
+<?php endif; ?>
+
 <div id="chatPanel" class="collapsed" role="dialog" aria-modal="false" aria-label="<?php echo htmlspecialchars($chatTitle); ?> chat window">
   <button id="closeChatBtn" aria-label="Close chat">&times;</button>
   <div class="card-header d-flex justify-content-between align-items-center chat-panel-header">
@@ -77,6 +85,7 @@ foreach ($providerOptions as $value => $label):
     </div>
   </div>
   <div id="chatWindow" class="card-body" aria-live="polite" aria-relevant="additions">
+<?php $agentName = getenv('AGENT_NAME') ?: 'Assistant'; ?>
 <?php foreach ($priorMessages as $msg):
     $rowClass = $msg['role'] === 'user' ? 'text-end mb-2' : 'text-start mb-2';
     $bubbleClass = match ($msg['role']) {
@@ -87,7 +96,7 @@ foreach ($providerOptions as $value => $label):
     $timestampLabel = match ($msg['role']) {
         'user' => 'Sent',
         'error' => 'Error',
-        default => 'Automated',
+        default => $agentName,
     };
     // MySQL returns "YYYY-MM-DD HH:MM:SS" with no timezone marker — since
     // the connection forces the session to UTC (see Database.php), that
@@ -109,5 +118,8 @@ foreach ($providerOptions as $value => $label):
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>window.REUNIFY_CHAT_API_BASE = <?php echo json_encode($assetPrefix); ?>;</script>
+<script>
+  window.REUNIFY_CHAT_API_BASE = <?php echo json_encode($assetPrefix); ?>;
+  window.REUNIFY_AGENT_NAME = <?php echo json_encode($agentName); ?>;
+</script>
 <script src="<?php echo htmlspecialchars($assetPrefix); ?>chat.js?v=<?php echo filemtime(__DIR__ . '/chat.js'); ?>"></script>

@@ -165,6 +165,16 @@ try {
     // "remembers," which is simply wrong. Persona (if enabled) layers on
     // top of this, it doesn't replace it.
     $systemPromptParts = ['Today\'s date is ' . date('F j, Y') . '.'];
+
+    // Same reasoning, same unconditional inclusion — the model doesn't
+    // know what THIS chat interface can actually do, so left ungrounded
+    // it invents plausible-sounding features (a paperclip icon, drag-and-
+    // drop) that don't exist here, observed directly in testing.
+    $capabilitiesNote = trim((string)getenv('CHAT_CAPABILITIES_NOTE'));
+    if ($capabilitiesNote !== '') {
+        $systemPromptParts[] = $capabilitiesNote;
+    }
+
     $personaPrompt = Persona::buildSystemPrompt();
     if ($personaPrompt !== null) {
         $systemPromptParts[] = $personaPrompt;
