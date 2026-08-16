@@ -30,6 +30,84 @@
   display: none;
 }
 
+/* ---------- Attention hint pointing at the bubble ---------- */
+.chat-hint {
+  position: fixed;
+  bottom: 28px;
+  right: 96px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 0.85rem 1.2rem;
+  border-radius: 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 999; /* below the bubble (1000) and panel (1001), above general page content */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 6px 24px rgba(13, 110, 253, 0.45);
+}
+.chat-hint.visible {
+  opacity: 1;
+  pointer-events: auto;
+  /* Deliberately continuous, not settling after a few bounces like an
+     earlier version — real visitors were missing the subtle version
+     entirely, including clicking the hero video expecting it to be
+     interactive instead of noticing the actual bubble. A gentle, ongoing
+     pulse (not a jarring flash) is the right tradeoff here specifically:
+     demo discoverability matters more than avoiding a persistent
+     animation in this context. */
+  animation: chatHintPulse 1.8s ease-in-out infinite;
+}
+.chat-hint::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  border-width: 7px 0 7px 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent #0d6efd;
+}
+.chat-hint button {
+  background: none;
+  border: none;
+  color: #fff;
+  opacity: 0.75;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.15rem;
+}
+.chat-hint button:hover {
+  opacity: 1;
+}
+@keyframes chatHintPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@media (max-width: 400px) {
+  .chat-hint {
+    right: 84px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Pulsing ring on the bubble itself while the hint is showing — draws the
+   eye to the actual clickable target, not just the label pointing at it. */
+#chatBubble.hinting {
+  animation: chatBubbleRing 1.8s ease-in-out infinite;
+}
+@keyframes chatBubbleRing {
+  0% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 0 rgba(13, 110, 253, 0.55); }
+  70% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 16px rgba(13, 110, 253, 0); }
+  100% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 0 rgba(13, 110, 253, 0); }
+}
+
 /* ---------- Chat panel ---------- */
 #chatPanel {
   position: fixed;

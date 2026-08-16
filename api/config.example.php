@@ -113,7 +113,33 @@ setDefaultEnv('STAGING_HOSTNAME_KEYWORDS', 'staging,dev,test');
 
 // Title shown in the chat header. Change this to your own site/business
 // name — nothing else in the code needs to change.
-setDefaultEnv('CHAT_TITLE', 'Reunify AI Chat');
+setDefaultEnv('CHAT_TITLE', 'RAIA');
+
+// The name shown next to the AI's replies in chat, alongside the
+// timestamp — "Raia · 9:14 AM" instead of a generic "Automated" label.
+// Defaults to a name-styled version of the RAIA brand rather than a
+// disconnected name, so it stays recognizably tied to the product while
+// still reading naturally in a friendly conversational context.
+setDefaultEnv('AGENT_NAME', 'Raia');
+
+// Small animated label pointing at the floating bubble, shown once (per
+// browser, remembered via localStorage) a short delay after page load —
+// first-time visitors often don't notice a small floating button on their
+// own. Disappears permanently once they open the chat or dismiss it
+// explicitly. Set to an empty string to disable it entirely.
+setDefaultEnv('CHAT_HINT_TEXT', 'Try the live demo! 👋');
+
+// Always told to the model, regardless of whether persona is enabled —
+// same reasoning as the date grounding below. Without this, the AI falls
+// back on its general knowledge of how chat apps typically work (most DO
+// have file upload) and confidently describes features this widget
+// doesn't actually have, observed directly: asked to attach a photo, it
+// invented a paperclip icon and drag-and-drop instructions that don't
+// exist in this interface, then kept doubling down even after being told
+// "I don't see that icon." Update this as real capabilities get added
+// (file attachment, order tracking links, etc.) — it's the one place
+// that needs to change, not the model's behavior.
+setDefaultEnv('CHAT_CAPABILITIES_NOTE', 'This chat is text-only. There is no way for a customer to attach, upload, or send files, photos, or images through it, and no real-time order tracking or account lookup. If asked to do any of these, say plainly that this chat can\'t do that yet, do not describe steps, icons, or drag-and-drop for a feature that does not exist, and point them to https://reunifystudios.com/contact-us/ instead. Never invent a phone number, email address, or any other contact detail that wasn\'t explicitly given to you here.');
 
 // Leave this blank if index.php/widget.php lives in the same folder as
 // chat.js and the api/ folder (the default setup). Only set this if you're

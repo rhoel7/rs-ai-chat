@@ -10,6 +10,7 @@ document.getElementById('newChatBtn').addEventListener('click', startNewChat);
 // if this script is ever loaded without that global defined (e.g. loaded
 // directly rather than via widget.php).
 const API_BASE = window.REUNIFY_CHAT_API_BASE || '';
+const AGENT_NAME = window.REUNIFY_AGENT_NAME || 'Assistant';
 
 // Floating widget open/close — the panel starts collapsed (see the
 // "collapsed" class in index.php's CSS) regardless of whether there's
@@ -21,8 +22,53 @@ const chatPanel = document.getElementById('chatPanel');
 function openPanel() {
   chatPanel.classList.remove('collapsed');
   chatBubble.classList.add('hidden');
+  dismissChatHint();
   document.getElementById('userInput').focus();
 }
+
+/**
+ * The hint only shows once per browser — first-time visitors often miss a
+ * small floating button, but someone who's already opened the chat once
+ * doesn't need to keep seeing an animated arrow pointing at it.
+ */
+function dismissChatHint() {
+  const hint = document.getElementById('chatHint');
+  if (hint) hint.classList.remove('visible');
+  chatBubble.classList.remove('hinting');
+  try {
+    localStorage.setItem('reunify_chat_hint_dismissed', 'true');
+  } catch (e) {
+    // localStorage can be unavailable (private browsing, disabled storage) —
+    // not critical, the hint just won't remember its dismissal next visit.
+  }
+}
+
+(function initChatHint() {
+  const hint = document.getElementById('chatHint');
+  if (!hint) return; // CHAT_HINT_TEXT is empty — hint disabled entirely, nothing to do
+
+  let alreadyDismissed = false;
+  try {
+    alreadyDismissed = localStorage.getItem('reunify_chat_hint_dismissed') === 'true';
+  } catch (e) {
+    // localStorage unavailable — default to showing the hint rather than assuming it was dismissed
+  }
+  if (alreadyDismissed) return;
+
+  setTimeout(() => {
+    if (!chatPanel.classList.contains('collapsed')) return; // already opened in the meantime
+    hint.classList.add('visible');
+    chatBubble.classList.add('hinting');
+  }, 1800);
+
+  const dismissBtn = document.getElementById('chatHintDismiss');
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // don't also trigger openPanel via a parent click handler
+      dismissChatHint();
+    });
+  }
+})();
 
 function closePanel() {
   chatPanel.classList.add('collapsed');
@@ -133,7 +179,7 @@ function appendMessage(role, text, isPlaceholder = false) {
   const bubbleClass = role === 'user' ? 'chat-bubble user' : 'chat-bubble ai';
   let html = `<div class="${bubbleClass}">${escapeHtml(text)}</div>`;
   if (!isPlaceholder) {
-    html += timestampCaptionHtml(role === 'user' ? 'Sent' : 'Automated', new Date());
+    html += timestampCaptionHtml(role === 'user' ? 'Sent' : AGENT_NAME, new Date());
   }
   row.innerHTML = html;
   win.appendChild(row);
@@ -217,7 +263,7 @@ function replaceLastAiMessage(text, isError = false, details = null) {
     bubbleEl.appendChild(pre);
   }
 
-  placeholder.insertAdjacentHTML('beforeend', timestampCaptionHtml(isError ? 'Error' : 'Automated', new Date()));
+  placeholder.insertAdjacentHTML('beforeend', timestampCaptionHtml(isError ? 'Error' : AGENT_NAME, new Date()));
   win.scrollTop = win.scrollHeight;
 }
 
