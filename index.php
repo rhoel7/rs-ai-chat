@@ -330,6 +330,80 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
     color: #495057;
     margin-bottom: 1.25rem;
   }
+  /* ---------- Merch callout — deliberately secondary, not competing
+     with the hero's primary CTAs ---------- */
+  .merch-section {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 2.5rem 2rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .merch-photo {
+    flex: 0 0 300px;
+    width: 300px;
+    border-radius: 0.75rem;
+    display: block;
+  }
+  .merch-text {
+    flex: 1 1 380px;
+  }
+  .merch-text h2 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .merch-text p {
+    color: #495057;
+    margin-bottom: 1.25rem;
+  }
+  .merch-links {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .merch-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    color: #212529;
+    text-decoration: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.15s ease;
+  }
+  .merch-links a:hover {
+    border-color: #0d6efd;
+    color: #0d6efd;
+  }
+  .merch-links .swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  @media (max-width: 700px) {
+    .merch-section {
+      flex-direction: column;
+      text-align: center;
+    }
+    .merch-photo {
+      width: 100%;
+      flex-basis: auto;
+    }
+    .merch-links {
+      justify-content: center;
+    }
+  }
   .embed-code {
     background-color: #212529;
     color: #f8f9fa;
@@ -450,6 +524,18 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
   <h2>Integration is one line</h2>
   <p>The chat bubble is a fully self-contained component. This is the entire setup:</p>
   <div class="embed-code">&lt;?php include '/path/to/reunify-ai-chat/widget.php'; ?&gt;</div>
+</div>
+
+<div class="merch-section">
+  <img src="docs/merch/raia-caps.jpeg" alt="RAIA embroidered dad hats, dark and light editions" class="merch-photo">
+  <div class="merch-text">
+    <h2>Star it on GitHub. Wear it in real life.</h2>
+    <p>RAIA is free and MIT licensed, no strings attached. If it's useful to you, an embroidered RAIA dad hat is a small way to acknowledge the time that went into building and maintaining it. Two editions, dark and light.</p>
+    <div class="merch-links">
+      <a href="https://shop.reunifystudios.com/products/raia-ai-assistant-hat-reunify-ai-developer-cap-open-source-programmer-hat-dark-edition" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#1a1a2e;"></span>Shop Dark Edition — $34.92</a>
+      <a href="https://shop.reunifystudios.com/products/raia-ai-assistant-hat-reunify-ai-developer-dad-cap-open-source-programmer-hat-khaki-stone-description" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#d8c9a8;"></span>Shop Light Edition — $34.92</a>
+    </div>
+  </div>
 </div>
 
 <?php
