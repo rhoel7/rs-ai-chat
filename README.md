@@ -1,5 +1,7 @@
 # Reunify AI Chat
 
+**🔗 Live demo: [agent.reunifystudios.com](https://agent.reunifystudios.com)**
+
 A lightweight, multi-provider AI chat harness. Right now it's a working demo you can point at Groq, Mistral, Gemini, OpenAI, Claude, DeepSeek, or Azure OpenAI, and switch between them without touching the frontend. Where it goes from here is open: it's built as a clean template to learn from and adapt, whether that means growing it into a full WordPress/WooCommerce plugin (the eventual plan for this particular build), or repurposing the pieces for something else entirely.
 
 By Rhoel Alcantara.
