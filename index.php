@@ -422,6 +422,36 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
       justify-content: center;
     }
   }
+  /* ---------- Author byline — quieter still than the merch section ---------- */
+  .author-byline {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .author-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .author-text {
+    font-size: 0.9rem;
+    color: #495057;
+  }
+  .author-text strong {
+    color: #212529;
+  }
+  .author-text a {
+    color: #0d6efd;
+    text-decoration: none;
+  }
+  .author-text a:hover {
+    text-decoration: underline;
+  }
   .embed-code {
     background-color: #212529;
     color: #f8f9fa;
@@ -555,6 +585,13 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
       <a href="https://shop.reunifystudios.com/discount/RAIA20?redirect=/products/raia-ai-assistant-hat-reunify-ai-developer-dad-cap-open-source-programmer-hat-khaki-stone-description" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#d8c9a8;"></span>Shop Light Edition — <del class="price-strike">$34.92</del> <span class="price-discounted">$27.94</span></a>
     </div>
   </div>
+</div>
+
+<div class="author-byline">
+  <img src="docs/author/rhoel.png" alt="Rhoel Alcantara" class="author-photo">
+  <p class="author-text">
+    <strong>Built by Rhoel Alcantara</strong> — <a href="https://www.linkedin.com/in/rhoel/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://github.com/rhoel7" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </p>
 </div>
 
 <?php
