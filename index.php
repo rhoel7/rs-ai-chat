@@ -577,12 +577,12 @@ $chatTitle = getenv('CHAT_TITLE') ?: 'AI Chat';
 <div class="merch-section">
   <img src="docs/merch/raia-caps.jpeg" alt="RAIA embroidered dad hats, dark and light editions" class="merch-photo">
   <div class="merch-text">
-    <h2>Star it on GitHub. Wear it in real life.</h2>
-    <p>RAIA is free and MIT licensed, no strings attached. If it's useful to you, an embroidered RAIA dad hat is a small way to acknowledge the time that went into building and maintaining it. Two editions, dark and light.</p>
+    <h2>Not merch. A flag for the love of building.</h2>
+    <p>This isn't really about RAIA. It's for anyone who loves building things, especially the AI kind, late nights, half-finished ideas, shipping something real instead of just talking about it. The brain-and-circuit mark just happens to be where that instinct led this time. Two editions, dark and light.</p>
     <p class="merch-discount">The links below apply 10% off automatically, you'll see it reflected at checkout, no code needed.</p>
     <div class="merch-links">
-      <a href="https://shop.reunifystudios.com/discount/RAIA10?redirect=/products/raia-ai-assistant-hat-reunify-ai-developer-cap-open-source-programmer-hat-dark-edition" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#1a1a2e;"></span>Shop Dark Edition — <del class="price-strike">$34.92</del> <span class="price-discounted">$31.43</span></a>
-      <a href="https://shop.reunifystudios.com/discount/RAIA10?redirect=/products/raia-ai-assistant-hat-reunify-ai-developer-dad-cap-open-source-programmer-hat-khaki-stone-description" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#d8c9a8;"></span>Shop Light Edition — <del class="price-strike">$34.92</del> <span class="price-discounted">$31.43</span></a>
+      <a href="https://shop.reunifystudios.com/discount/RAIA10?redirect=/products/raia-ai-assistant-hat-reunify-ai-developer-cap-open-source-programmer-hat-dark-edition" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#1a1a2e;"></span>Shop Dark Edition — <del class="price-strike">$28.48</del> <span class="price-discounted">$25.63</span></a>
+      <a href="https://shop.reunifystudios.com/discount/RAIA10?redirect=/products/raia-ai-assistant-hat-reunify-ai-developer-dad-cap-open-source-programmer-hat-khaki-stone-description" target="_blank" rel="noopener noreferrer"><span class="swatch" style="background-color:#d8c9a8;"></span>Shop Light Edition — <del class="price-strike">$28.48</del> <span class="price-discounted">$25.63</span></a>
     </div>
   </div>
 </div>
